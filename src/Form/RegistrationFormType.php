@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Email;
 use Captcha\Bundle\CaptchaBundle\Form\Type\CaptchaType; 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -80,6 +81,11 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('giveInfo', CheckboxType::class, [
+                'mapped' => false,
+                'label'    => 'En soumettant ce formulaire, j\'accepte que les informations saisies soient utilisées pour me contacter dans le cadre du concours GotBet.',
+                'required' => true,
             ])
             ->add('captchaCode', CaptchaType::class, array('captchaConfig' => 'ExampleCaptcha')); 
         ;

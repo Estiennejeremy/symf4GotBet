@@ -16,4 +16,5 @@ return [
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle::class => ['all' => true],
     Captcha\Bundle\CaptchaBundle\CaptchaBundle::class => ['all' => true],
+    Fairlane\CookieConsentBundle\FairlaneCookieConsentBundle::class => ['all' => true],
 ];

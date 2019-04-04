@@ -1,0 +1,16 @@
+# Fairlane Cookie Consent configuration
+fairlane_cookie_consent:
+    active: true
+    use_bootstrap: true
+    use_jquery: true
+    translate: false
+    cookie_lifetime: 365 # days
+    twig:
+        text_info: 'En poursuivant votre navigation sur ce site, vous acceptez l utilisation de traceurs (cookies) afin de réaliser des statistiques anonymes de visites.'
+        text_accept_button: 'Accepter'
+        text_additional_info_link: ''
+        url_additional_info: ''
+
+twig:
+    globals:
+      fairlane_cookie_consent: '@fairlane_cookie_consent.twig'

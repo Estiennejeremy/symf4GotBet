@@ -3,56 +3,59 @@
 {% block title %}Bienvenue sur GotBet!{% endblock %}
 
 {% block body %}
-<div style="position: fixed; z-index: -99; width: 100%; height: 100%">
- <video autoplay muted loop id="myVideo">
-  <source src="{{ asset('video/trailer.mp4') }}" type="video/mp4">
-
-</video>
-
-
-
- </div>
+    <div style="position: fixed; z-index: -99; width: 100%; height: 100%">
+        <video autoplay muted loop id="myVideo">
+            <source src="{{ asset('video/trailer.mp4') }}" type="video/mp4">
+        </video>
+    </div>
+    {# Encadré de notification #}
+    {% if message == true %}
+        <div class="alert alert-success" role="alert">
+            Merci beaucoup ! Votre pronostic a bien été enregistré. A bientôt pour les résultats, restez à l'affût !<br />
+            Suivez les <a href="{{path('scores')}}" class="alert-link">scores</a> et <a href="{{path('compte')}}" class="alert-link">les statistiques</a>.
+        </div>
+    {% endif %}
+    {# fin encadré de notification #}
     <div class="jumbotrol2">
         <h1 class="display5" >Bienvenue sur GoTBet</h1>
 
         <p class="lead2">Pronostiquez sur les personnages qui vont survivre, mourir ou devenir marcheur blanc dans la saison finale de Game of Thrones.
-        La saison 8 démarre le 14 avril 2019 ! Faites vos pronostics avant le début du premier épisode !<br><br>
-    Répondez au questionnaire ou inscrivez-vous pour pouvoir répondre en cliquant ci-dessous.</br></br>
-          {% if message == true %}
-          Votre pronstic a été pris en compte, on vous remercie à bientôt pour les résulats !<br><br>
-          {% endif %}
-    <img style="height: 20%; width: 20%; display: block;" src="{{asset('img/logofondblanc.png')}}" alt="Card image">
+                        La saison 8 démarre le 14 avril 2019 ! Faites vos pronostics avant le début du premier épisode !<br><br>
+                        Répondez au questionnaire ou inscrivez-vous pour pouvoir répondre en cliquant ci-dessous.</br></br>
+            
+                
+            
+            <img style="height: 20%; width: 20%; display: block;" src="{{asset('img/logofondblanc.png')}}" alt="Card image">
         </p>
 
         {% if app.user %}
             <p class="btn-cont">
                 <a class="btn" href="{{path('questionnaire')}}">Questionnaire
-                <span class='line-1'></span>
-                <span class='line-2'></span>
-                <span class='line-3'></span>
-                <span class='line-4'></span>
+                    <span class='line-1'></span>
+                    <span class='line-2'></span>
+                    <span class='line-3'></span>
+                    <span class='line-4'></span>
                 </a>
             </p>
         {% else %}
             <p class="btn-cont">
                 <a class="btn" href="{{ path('app_register') }}">Inscription
-                <span class='line-1'></span>
-                <span class='line-2'></span>
-                <span class='line-3'></span>
-                <span class='line-4'></span>
+                    <span class='line-1'></span>
+                    <span class='line-2'></span>
+                    <span class='line-3'></span>
+                    <span class='line-4'></span>
                 </a>
 
                 <a class="btn" href="{{ path('app_login') }}">Connexion
-                <span class='line-1'></span>
-                <span class='line-2'></span>
-                <span class='line-3'></span>
-                <span class='line-4'></span>
+                    <span class='line-1'></span>
+                    <span class='line-2'></span>
+                    <span class='line-3'></span>
+                    <span class='line-4'></span>
                 </a>
             </p>
         {% endif %}
-
+        </div>
     </div>
-</div>
 
 
 {% endblock %}

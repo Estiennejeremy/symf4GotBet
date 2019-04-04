@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "captcha-com/symfony-captcha-bundle": "4.*",
         "excelwebzone/recaptcha-bundle": "^1.5",
+        "fairlane/cookie-consent-bundle": "^1.0",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",

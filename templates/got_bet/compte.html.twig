@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="jumbotron jumbotrol">
-        <h1 class="display-4" style="font-family: 'viking'">Mon Compte</h1>
+        <h1 class="display-4" style="font-family: 'viking'">Les statistiques</h1>
         <p class="lead">{{app.user.mail}}</br>
           Retrouvez vos pronostics et votre score.
 
@@ -13,19 +13,38 @@
     <div class="container">
     <div class="row justify-content-center">
         <div class="col-15">
+        <p style="color: white; text-align: center;"><b>Attention</b>. L'affichage de vos réponses peut entraîner un spoil.</p>
+            <p class="btn-compte">
+                <a class="btn" id="spoil" href="#"><b>Cliquez ici pour vos réponses</b>
+                    <span class='line-1'></span>
+                    <span class='line-2'></span>
+                    <span class='line-3'></span>
+                    <span class='line-4'></span>
+                </a>
+            </p>
         <div style="margin-left:20px;">
-            <div class="card border-primary mb-3" style="max-width: 30rem;">
-                <div class="card-header">Mon score : {{res[0].total}}</br>
+            <div class="card border-primary mb-3" style="max-width: 40rem;">
+                <div class="card-header">
+                    <div class="row" >
+                        <div class="col-6">
+                            <b>Mon score : {{res[0].total}}</b>
+                        </div>
+                        <div class="col-6" style="text-align: right;">
+                            <b>{{nb}}</b> participants
+                        </div>
+                    </div>
+                     
                 </div>
                     <div class="card-body">
-                        <table class="table table">
+                        <table id="score" class="table table" style="display: none;">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
                                     <th scope="col">Nom</th>
                                     <th scope="col">Prénom</th>
                                     <th scope="col">Pronostic</th>
-                                     <th scope="col">Réponse</th>
+                                    <th scope="col">Réponse</th>
+                                    <th scope="col">Statistiques</th>
                                 </tr>
                             </thead>
                                     <tbody>
@@ -47,6 +66,33 @@
                                           {% endif %}
 
                                              <td> {{ pr.etat }} </td>
+
+                                             <td>
+                                                   {% for s in pr.stats %}
+                                                        {% if s.libelle == 'Vivant' %}
+                                                        {{s.libelle}} : 
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100" title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% elseif s.libelle == 'Marcheur blanc' %}
+                                                        {{s.libelle}} : 
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100" title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% elseif s.libelle == 'Mort' %}
+                                                        {{s.libelle}} : 
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100" title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% else %}
+                                                        Non voté : 
+                                                            <div class="progress">
+                                                              <div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{s.nombre}}%" aria-valuenow="{{s.nombre}}" aria-valuemin="0" aria-valuemax="100"  title="{{s.nombre|round}}"></div>
+                                                            </div>
+                                                        {% endif %}
+                                                        {# {{ s.libelle }} {{s.nombre}} #}<br>
+                                                   {% endfor %}
+                                              </td>
                                           </tr>
                                         {% endfor %}
                                     </tbody>
@@ -56,4 +102,13 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function(){
+    $("#spoil").click(function(){
+        $("#score").fadeIn("slow");
+    })
+})
+</script>
 {% endblock %}
