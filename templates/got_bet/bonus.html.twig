@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GotBet - Questionnaire{% endblock %}
+
+{% block body  %}
+
+    {% if (app.user.jouerBonnus == 0)%}
+    <div class="jumbotrol" >
+        <h1 class="display-5" style="font-family: 'viking'" >Bonus</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <p class="lead">Qui sera sur le trône ?</br>
+                                    Trouvez la bonne réponse et vous obtenez 5 points !</br>
+                                    Sélectionnez (en cochant) le personnage (ou "autre" si pensez à un autre personnage) </br>
+                                    La validation est définitive, vous ne pourrez pas modifier votre pronostic
+                    </p>
+                </div>
+                <div class="col-4">
+                    <img style="width: 70%;" src="{{asset('img/cadeauGotbet.png')}}" alt="cadeauxGot">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-15">
+            <div style="margin-left:20px;">
+                <div class="card border-primary mb-3" style="max-width: 50rem;">
+                    <div class="card-header"></div>
+                        <div class="card-body">
+                        <form action="{{ path('createReponseBonus') }}" method="POST">
+                            <table class="table table">
+
+                                        <tbody>
+
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                          
+                                             {% for perso in personnages %}
+                                                    <tr>
+                                                    <td><img src="{{asset('img/personnages/' ~ perso.id ~ '.png')}}" style="width:20%" alt="..." class="img-thumbnail rounded-circle"></td>
+                                                    <td style="vertical-align:middle">{{ perso.prenom }}</td>
+                                                    <td style="vertical-align:middle" id="{{ perso.id }}" class="id">{{ perso.nom }}</td>
+                                                    <td style="vertical-align:middle">
+                                                       
+                                                          
+                                                              <input type="radio" name="personnage" value="{{ perso.id }}" autocomplete="off"> 
+                                                   
+                                                    </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                <tr>
+                                                    <td></td>
+                                                    <td style="vertical-align:middle">Autre</td>
+                                                    <td style="vertical-align:middle" id="0" class="id"></td>
+                                                    <td style="vertical-align:middle">
+                                                       
+                                                            <input type="radio" name="personnage" value="autre" autocomplete="off" > 
+                                                  
+                                                    </td>
+                                                    </tr>
+                                            </div>
+                                        </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-outline-primary btn-block" id="validate">Valider</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    {% else %}
+    <div class="jumbotrol" >
+        <h1 class="display-4" style="font-family: 'viking'">Questionnaire</h1>
+        <p class="lead">Vous avez déjà répondu au questionnaire. </br>
+                        Rendez-vous sur les <a class="link" href="{{path('compte')}}">statistiques</a> et comparer vos réponses avec les autres participants.
+        </p>
+    </div>
+    {% endif %}
+{% endblock %}
+

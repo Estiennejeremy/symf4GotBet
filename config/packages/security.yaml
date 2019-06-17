@@ -32,6 +32,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
       - { path: /gotbet/questionnaire, roles: ROLE_USER }
+      - { path: /gotbet/bonus, roles: ROLE_USER }
       - { path: /gotbet/scores, roles: ROLE_USER }
       - { path: /gotbet/compte, roles: ROLE_USER }
 

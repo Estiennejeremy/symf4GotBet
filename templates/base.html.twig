@@ -12,7 +12,6 @@
         </script>
         <!-- FIN Global site tag (gtag.js) - Google Analytics -->
 
-
         <meta charset="UTF-8" />
         <title>{% block title %}Bienvenue sur GotBet!{% endblock %}</title>
         {% block stylesheets %}
@@ -22,10 +21,11 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link href="{{ asset('css/css.css') }}" rel="stylesheet" />
         <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <style type="text/css">
           @font-face {
             font-family: 'viking';
-            src:    url({{asset('/css/font/Game-of-Thrones.otf')}}) format('opentype');;
+            src:    url({{asset('css/font/Game-of-Thrones.otf')}}) format('opentype');;
           }
         </style>
         <script src="https://www.google.com/recaptcha/api.js"></script>
@@ -33,23 +33,36 @@
     </head>
     <body style="background-color: #101012">
     {{ include('got_bet/cookie-info.html.twig') }}
-      <h5  class="display7" style="padding-top:10px"><a class="email" href="{{path('got_bet')}}">  GOTBET</a></h5>
-      <h5 class="display8" style="padding-top:20px;padding-right:50px"> Menu </h5>
-      <div class="menu"> <span></span> </div>
-        <nav id="nav">
-          <ul class="main">
-            <li><a href="{{path('got_bet')}}">Accueil</a></li>
-            {% if app.user %}
-              <li><a href="{{path('questionnaire')}}">Questions</a></li>
-              <li><a href="{{path('scores')}}">Scores</a></li>
-              <li><a href="{{path('compte')}}">Les statistiques</a></li>
-            {% endif %}
-            <li><a href="{{path('about')}}">Tout savoir</a></li>
-            {% if app.user %}
-                <li><a href="{{path('app_logout')}}">Déconnexion</a></li>
-            {% endif %}
-		      </ul>
-        </nav>
+      <div class="row centered">
+        <div class="col-12">
+          <h5><a class="email" href="{{path('got_bet')}}"> GOTBET</a></h5>
+        </div>
+          <div class="menu" style=""><h5 class=" white" style="font-family: 'viking'; position: relative; margin-left: -20px;"> Menu  </h5><span></span></div>
+            <nav id="nav">
+              <ul class="main">
+                <li><a href="{{path('got_bet')}}" style="text-align: left;">Accueil</a></li>
+                {% if app.user %}
+                    {#
+                      <li><a href="{{path('questionnaire')}}" style="text-align: left;">Questionnaire</a></li>
+                      <li><a href="{{path('bonus')}}" style="text-align: left;">Question bonus</a></li>
+                    #}
+                  <li><a href="{{path('scores')}}" style="text-align: left;">Scores</a></li>
+                  <li><a href="{{path('compte')}}" style="text-align: left;">Les statistiques</a></li>
+                {% endif %}
+                <li><a href="{{path('about')}}" style="text-align: left;">Tout savoir</a></li>
+                <li><a href="{{path('communautes')}}" style="text-align: left;">Votes de la communauté</a></li>
+                {% if app.user %}
+                    <li><a href="{{path('app_logout')}}" style="text-align: left;">Déconnexion</a></li>
+                {% endif %}
+                <li>
+                  <i><b>La vidéo, les images utilisées proviennent de HBO et cette première est la bande-annonce officielle de la saison 8 diffusée sur youtube.
+                    Ce site internet est à but non lucratif, et dans le cadre d'un projet d'étude en licence ASI.
+                  </b></i>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       <div class="overlay">
         {# Quelqu'un m'explique à quoi ça sert ?#}
       </div>
@@ -70,9 +83,6 @@
       
       {% endblock %}
 
-      {% block script %}
-      
-      {% endblock %}
       
       <script>
         $(document).ready(function() { 
@@ -83,14 +93,14 @@
         })
       </script>
       <script src="{{ asset('js/nav.js') }}"></script>
+      <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+      <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
       <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
-      <div>
-        <span class="phraseCopyright">
-          La vidéo, les images utilisées proviennent de HBO et cette première est la bande-annonce officielle de la saison 8 diffusée sur youtube.
-          Ce site internet est à but non lucratif, et dans le cadre d'un projet d'étude en licence ASI.
-        </span>
-      </div>
-
+      {% block script %}
+      
+      {% endblock %}
   </body>
 </html>

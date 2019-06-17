@@ -3,21 +3,41 @@
 {% block title %}GotBet - Scores{% endblock %}
 
 {% block body %}
+{% set classement = 0 %}
     <div class="jumbotrol">
         <h1 class="display-4"  style="font-family: 'viking'">Scores</h1>
         <p class="lead">Tableau des scores</br>
                         Chaque bonne réponse vous rapporte 1 point.</br>
-                        Les 4 premiers remportent un cadeau ! (Un tirage au sort sera effectué en cas d'égalité)
+                        Les 4 premiers remportent un cadeau ! (Un tirage au sort sera effectué en cas d'égalité) <br />
+                        Comparez votre résulat avec celui d'un autre joueur en cliquant sur son nom !<br/>
         </p>
     </div>
     <div class="container">
     <div class="row justify-content-center">
         <div class="col-15">
         <div style="margin-left:20px;">
+        {% if userScore is defined %}
+            {{ userScore.nom }}
+        {% endif %}
             <div class="card border-primary mb-3" style="max-width: 30rem;">
-                <div class="card-header">{{users|length}} participants</div>
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            {{users|length}} participants
+                        </div>
+                        <div class="col-6" style="text-align: right;">
+                            {% for user in users %}
+                                {% set classement = classement + 1 %}
+                                {% if user.id == app.user.id %}
+                                    Mon classement : {{classement}} <br />
+                                    Mon score : {{user.score}}
+                                {% endif  %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
                     <div class="card-body">
-                        <table class="table table">
+                        <table id="Datatable" class="table table display">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
@@ -26,21 +46,145 @@
                                     <th scope="col">Score</th>
                                 </tr>
                             </thead>
+                            <tbody>
                             {% set ordre = 0 %}
                             {% for user in users %}
-                                    <tbody>
-                                        <tr>
-                                        <td>{% set ordre = ordre + 1 %} {{ordre}}</td>
-                                        <td>{{ user.prenom }}</td>
-                                        <td>{{ user.nom }}</td>
-                                        <td>{{ user.score }}</td>
-                                        </tr>
-                                    </tbody>
+                                <tr class="score" id="{{user.id}}" onclick="reply_click({{user.id}})">
+                                    <td>{% set ordre = ordre + 1 %} {{ordre}}</td>
+                                    <td>{{ user.prenom }}</td>
+                                    <td>{{ user.nom }}</td>
+                                    <td>{{ user.score }}</td>
+                                </tr>
                             {% endfor %}
+                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+        {% include 'modals/modalScoreUser.html.twig' %}
     </div>
+{% endblock %}
+{% block script %}
+<script>
+        $('#modalScore').on('hidden.bs.modal', function() {
+            $("#modalScore").find(".modal-title").empty();
+            $("#modalScore").find(".card-header").empty();
+            $("#modalScore").find(".corps-table").empty();
+        })
+        function reply_click(obj)
+        {
+            $("#modalScore").find(".modal-title").empty();
+            $("#modalScore").find(".card-header").empty();
+            $("#modalScore").find(".corps-table").empty();
+            var id = obj;
+            var url =  Routing.generate('score_user', {"id":id});
+            $.ajax({
+                async: true,
+                type: 'GET',
+                url: url,
+                success: function(data, dataType){
+                    $("#modalScore").find(".modal-title").append("Réponses de " + data['userScore'][0]['nom'] + " " + data['userScore'][0]['prenom']);
+                    if (data['troneConnected'][0] == null) {
+                        var troneConnected = `<div class="col-6">Votre trône : un autre personnage</div>`;
+                    } else {
+                        var troneConnected = `<div class="col-6">Votre trône : ${data['troneConnected'][0]['nom']} ${data['troneConnected'][0]['prenom']}</div>`;
+                    }
+                    if (data['troneUser'][0] == null) {
+                        var troneUser = `<div class="col-6">Son trône : un autre personnage</div>`;
+                    } else {
+                        var troneUser = `<div class="col-6">Son trône : ${data['troneUser'][0]['nom']} ${data['troneUser'][0]['prenom']}</div>`;
+                    }
+                    $("#modalScore").find(".card-header").append(`<div class="row"> ${troneUser}  ${troneConnected}</div>`);
+                    var etatString = "";
+                    var etatConnected = "";
+                    for (var i = 0; i<24; i++) {
+                        if(data['personnages'][i]['etat'] == null) {
+                            etatString = `<td style="vertical-align: middle"> ${data['personnages'][i]['statut']} </td>`;
+                        } else {
+                            if (data['personnages'][i]['etat'] == data['personnages'][i]['statut']) {
+                                etatString = `<td style="color:green;vertical-align: middle">${data['personnages'][i]['statut']} </td>`;
+                            } else {
+                                etatString = `<td style="color:red;vertical-align: middle">${data['personnages'][i]['statut']} </td>`;
+                            }
+                        }
+
+                        if(data['personnages'][i]['etat'] == null) {
+                            etatConnected = `<td style="vertical-align: middle"> ${data['reponsesConnected'][i]['statut']} </td>`;
+                        } else {
+                            if (data['personnages'][i]['etat'] === data['reponsesConnected'][i]['statut']) {
+                                etatConnected = `<td style="color:green;vertical-align: middle">${data['reponsesConnected'][i]['statut']} </td>`;
+                            } else {
+                                etatConnected = `<td style="color:red;vertical-align: middle">${data['reponsesConnected'][i]['statut']} </td>`;
+                            }
+                        }
+                        
+                        $("#modalScore").find(".corps-table").append(
+                            `
+                                <tr>
+                                    <td style="vertical-align: middle" style="width:40%">        
+                                        <img src="{{asset('img/personnages/')}}${data['personnages'][i]['id']}.png" alt="..." class="img-thumbnail rounded-circle">
+                                    </td>
+                                    <td style="vertical-align: middle"> ${data['personnages'][i]['nom']} </td>
+                                    <td style="vertical-align: middle"> ${data['personnages'][i]['prenom']} </td>
+                            ` + etatString +
+                            `
+                                    <td style="vertical-align: middle">${data['personnages'][i]['etat']} </td>
+                            ` + etatConnected +
+                            `
+                                </tr>
+                            `
+                        );
+                    }
+                    $('#modalScore').modal();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown)
+                {
+                    alert("Erreur");
+                    console.log("Error: "+errorThrown);
+                }
+            });
+        }
+        
+    $(document).ready( function () {
+        //@TODOOOOOOOOO
+        
+        $('#Datatable').DataTable({
+            "pageLength": 30,
+                language: {
+                processing:     "Traitement en cours...",
+                search:         "Rechercher&nbsp;:",
+                lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+                info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                infoEmpty:      "Aucune donnée",
+                infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                infoPostFix:    "",
+                loadingRecords: "Chargement en cours...",
+                zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                emptyTable:     "Aucune donnée disponible dans le tableau",
+                paginate: {
+                    first:      "Premier",
+                    previous:   "Pr&eacute;c&eacute;dent",
+                    next:       "Suivant",
+                    last:       "Dernier"
+                },
+                aria: {
+                    sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                    sortDescending: ": activer pour trier la colonne par ordre décroissant"
+                }
+            }
+        });
+        var table = $('#Datatable').DataTable();
+        $('#Datatable tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+            
+        });
+    });
+</script>
 {% endblock %}

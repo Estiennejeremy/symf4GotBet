@@ -3,46 +3,27 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-6">
-<div style="margin-left:20px;margin-top:20px;">
-    <div class="card border-dark mb-3" style="max-width: 30rem;">
-    <div class="card-header"><h2>Connexion</h2></div>
-    <div class="card-body">
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <label for="inputMail" class="sr-only">E-mail</label>
-    <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" placeholder="Adresse e-mail..." required autofocus></br>
-    <label for="inputPassword" class="sr-only">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe..." required></br>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+<div class="col-4 offset-4">
+    <div style="margin-top:30px">
+        <div class="card border-dark mb-3">
+        <div class="card-header"><h2>Connexion</h2></div>
+            <div class="card-body">
+                <form method="post">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <label for="inputMail" class="sr-only">E-mail</label>
+                    <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" placeholder="Adresse e-mail..." required autofocus></br>
+                    <label for="inputPassword" class="sr-only">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe..." required></br>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Se connecter
+                    </button><br />
+                    {#<a href="" class="" style="text-align: right;">Réinitialiser le mot de passe</a>#}
+                </form>
+            </div>
         </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Se connecter
-    </button>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
+    </div>
 </div>
 {% endblock %}

@@ -54,8 +54,8 @@
   }
 
   nav{
-    position: absolute;
-    top: 50%;
+    /*position: absolute;
+    top: 50%;*/
   }
 
   .display6{
@@ -73,8 +73,8 @@
 	}
 	.display8{
     font-family:'viking';
-    position: absolute; /* postulat de départ */
-		top: 2.5%; left: 93%; 
+    /*position: absolute; 
+		top: 2.5%; left: 93%; */
 		color: #ffffff;
 		transform: translate(-50%, -50%);
 		
@@ -129,8 +129,8 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-left: -15px;
-	margin-top: -1.5px;
+	margin-left: 5px;
+	margin-top: 10px;
 }
 .menu span, .menu span::before, .menu span::after {
 	display: block;

@@ -85,18 +85,6 @@ class Personnage
         return $this;
     }
 
-    public function getUserPersonnage(): ?UserPersonnage
-    {
-        return $this->userPersonnage;
-    }
-
-    public function setUserPersonnage(?UserPersonnage $userPersonnage): self
-    {
-        $this->userPersonnage = $userPersonnage;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Reponse[]
      */

@@ -9,3 +9,5 @@ captcha_routing:
   resource: "@CaptchaBundle/Resources/config/routing.yml" 
 fairlane_cookie_consent:
   resource: "@FairlaneCookieConsentBundle/Resources/config/routing.yml"
+fos_js_routing:
+  resource: "@FOSJsRoutingBundle/Resources/config/routing/routing-sf4.xml"

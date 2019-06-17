@@ -1,0 +1,350 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GotBet - Communauté{% endblock %}
+
+{% block body %}
+    <div class="jumbotron jumbotrol">
+        <h1 class="display-4" style="font-family: 'viking'">Votes de la communaute</h1>
+        <p class="lead">
+            Retrouvez les principaux votes <br>
+            Et les résultats des votes pour l'ensemble des joueurs sont ................
+
+        </p>
+    </div>
+    <div class="container">
+<div class="row justify-content-center">
+        <div class="col-15">
+        <p style="color: white; text-align: center;"><b>Attention</b>. L'affichage de ces réponses peut entraîner un spoil.</p>
+            <p class="btn-compte">
+                <a class="btn" id="spoil" href="#"><b>Cliquez ici pour les votes</b>
+                    <span class='line-1'></span>
+                    <span class='line-2'></span>
+                    <span class='line-3'></span>
+                    <span class='line-4'></span>
+                </a>
+            </p>
+        <div style="margin-left:20px;">
+            <div class="card border-primary mb-3" style="max-width: 40rem;">
+                <div class="card-header">
+
+                    <div class="row">
+                        <div class="col-offset-3 col-9">
+                                <b>Sur le trône : 
+                                                                            Jon Snow
+                                                                    </b>
+                        </div>
+                    </div>
+                                     </div>
+                    <div class="card-body">
+                        <table id="score" class="table table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col">Vote</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                                    <tbody>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}1.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Stark </td>
+                                            <td style="vertical-align: middle"> Arya </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}2.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Snow </td>
+                                            <td style="vertical-align: middle"> Jon </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}3.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Stark </td>
+                                            <td style="vertical-align: middle"> Sansa </td>
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}4.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Stark </td>
+                                            <td style="vertical-align: middle"> Bran </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}5.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Lannister </td>
+                                            <td style="vertical-align: middle"> Cersei </td>
+                                            
+                                             <td style="vertical-align: middle">Mort </td>
+
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}6.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Lannister </td>
+                                            <td style="vertical-align: middle"> Jaime </td>
+                                            
+                                             <td style="vertical-align: middle">Mort </td>
+
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}7.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Lannister </td>
+                                            <td style="vertical-align: middle"> Tyrion </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}8.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Targaryen </td>
+                                            <td style="vertical-align: middle"> Daenerys </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}9.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Greyjoy </td>
+                                            <td style="vertical-align: middle"> Yara </td>
+                                            
+                                             <td style="vertical-align: middle">Mort </td>
+
+
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}10.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+
+                                                                                         </td>
+                                            <td style="vertical-align: middle"> Greyjoy </td>
+                                            <td style="vertical-align: middle"> Theon </td>
+                                            
+                                             <td style="vertical-align: middle">Mort </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}11.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Mormont </td>
+                                            <td style="vertical-align: middle"> Jorah </td>
+                                            
+                                             <td style="vertical-align: middle">Mort </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}12.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                             </td>
+                                            <td style="vertical-align: middle"> Clegane </td>
+                                            <td style="vertical-align: middle"> Sandor </td>
+                                             
+                                          
+                                             <td style="vertical-align: middle">Vivant </td>
+
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}13.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                             </td>
+                                            <td style="vertical-align: middle"> Clegane </td>
+                                            <td style="vertical-align: middle"> Gregor </td>
+                                            
+                                             <td style="vertical-align: middle">Mort </td>
+
+                                          </tr>
+                                          <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}14.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Tarley  </td>
+                                            <td style="vertical-align: middle"> Samuel </td>
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}15.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle">  </td>
+                                            <td style="vertical-align: middle"> Gilly </td>
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}16.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                              </td>
+                                            <td style="vertical-align: middle">  </td>
+                                            <td style="vertical-align: middle"> Sam (enfant) </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}17.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                           </td>
+                                            <td style="vertical-align: middle"> De Torth </td>
+                                            <td style="vertical-align: middle"> Brienne </td>
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}18.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Mervault </td>
+                                            <td style="vertical-align: middle"> Davos </td>
+                                            
+                                             <td style="vertical-align: middle">Mort </td>
+
+                                 
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}19.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                              </td>
+                                            <td style="vertical-align: middle">  </td>
+                                            <td style="vertical-align: middle"> Bronn </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                     
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}20.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Payne </td>
+                                            <td style="vertical-align: middle"> Podrick </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                     
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}21.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle"> Fléau-d&#039;Ogres </td>
+                                            <td style="vertical-align: middle"> Tormund </td>
+                                             <td style="vertical-align: middle">Marcheur Blanc </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}22.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle">  </td>
+                                            <td style="vertical-align: middle"> Ver Gris </td>
+                                             <td style="vertical-align: middle">Mort </td>
+
+                                         
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}23.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                            </td>
+                                            <td style="vertical-align: middle">  </td>
+                                            <td style="vertical-align: middle"> Gendry </td>
+                                            
+                                             <td style="vertical-align: middle">Vivant </td>
+
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}24.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                             </td>
+                                            <td style="vertical-align: middle"> Dondarrion </td>
+                                            <td style="vertical-align: middle"> Béric </td>
+                                             <td style="vertical-align: middle">Mort </td>
+
+                                     
+                                          </tr>
+                                                                                  <tr>
+                                            <td style="vertical-align: middle">
+                                            
+                                                <img src="{{asset('img/personnages/')}}25.png" style="width:30%" alt="..." class="img-thumbnail rounded-circle">
+                                              </td>
+                                            <td style="vertical-align: middle"> Greyjoy </td>
+                                            <td style="vertical-align: middle"> Euron </td>
+                                            <td style="vertical-align: middle">Mort </td>
+
+                                            
+                                          </tr>
+                                   
+                                                                     </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block script %}
+<script>
+$(document).ready(function(){
+    $("#spoil").click(function(){
+        $("#score").fadeIn("slow");
+        $("#spoil").hide();
+    })
+})
+</script>
+{% endblock %}

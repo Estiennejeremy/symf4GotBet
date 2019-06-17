@@ -61,8 +61,18 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $jouer;
+    
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $jouerBonnus;
 
-
+    /**
+    * @ORM\ManyToOne(targetEntity="App\Entity\Personnage")
+     * @ORM\JoinColumn(nullable=true)
+    */
+    private $personnage;
+    
     public function __construct()
     {
         $this->reponses = new ArrayCollection();
@@ -187,18 +197,6 @@ class User implements UserInterface, \Serializable
         ) = unserialize($serialized, array('allowed_classes' => false));
     }
 
-    // public function getUserPersonnage(): ?UserPersonnage
-    // {
-    //     return $this->userPersonnage;
-    // }
-    //
-    // public function setUserPersonnage(?UserPersonnage $userPersonnage): self
-    // {
-    //     $this->userPersonnage = $userPersonnage;
-    //
-    //     return $this;
-    // }
-
     /**
      * @return Collection|Reponse[]
      */
@@ -268,5 +266,29 @@ class User implements UserInterface, \Serializable
   public function setCaptchaCode($captchaCode)
   {
     $this->captchaCode = $captchaCode;
+  }
+
+  public function getJouerBonnus(): ?bool
+  {
+      return $this->jouerBonnus;
+  }
+
+  public function setJouerBonnus(?bool $jouerBonnus): self
+  {
+      $this->jouerBonnus = $jouerBonnus;
+
+      return $this;
+  }
+
+  public function getPersonnage(): ?Personnage
+  {
+      return $this->personnage;
+  }
+
+  public function setPersonnage(?Personnage $personnage): self
+  {
+      $this->personnage = $personnage;
+
+      return $this;
   }
 }

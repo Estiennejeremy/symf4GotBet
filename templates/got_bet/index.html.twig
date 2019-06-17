@@ -12,50 +12,297 @@
     {% if message == true %}
         <div class="alert alert-success" role="alert">
             Merci beaucoup ! Votre pronostic a bien été enregistré. A bientôt pour les résultats, restez à l'affût !<br />
+             {% if app.user.jouerBonnus is null%}
+            Et noubliez pas de choisir <a href="{{path('bonus')}}" class="alert-link"> votre roi</a><br />
+             {% endif %}
+            Suivez les <a href="{{path('scores')}}" class="alert-link">scores</a> et <a href="{{path('compte')}}" class="alert-link">les statistiques</a>.
+        </div>
+    {% endif %}
+    {% if messagebonus == true %}
+        <div class="alert alert-success" role="alert">
+            Merci beaucoup ! Votre pronostic a bien été enregistré. A bientôt pour les résultats, restez à l'affût !<br />
+           {% if app.user.jouer is null%}
+            Et n'oubliez pas de remplir  <a href="{{path('questionnaire')}}" class="alert-link"> le questionnaire</a> sur les personnages<br />
+            {% endif %}
             Suivez les <a href="{{path('scores')}}" class="alert-link">scores</a> et <a href="{{path('compte')}}" class="alert-link">les statistiques</a>.
         </div>
     {% endif %}
     {# fin encadré de notification #}
-    <div class="jumbotrol2">
-        <h1 class="display5" >Bienvenue sur GoTBet</h1>
+        <div class="container">
+            <div class="row">
+                <div class="mt-2 col-12 centered"> 
+                    <h1 class="white" style="font-family: 'viking'">Bienvenue sur GoTBet</h1>
+                </div>
+            </div>
+            <div class="mt-3 row">
+                {#
+                <div class="col-lg-6 col-12">
+                    <h1></h1>
+                    <div id="clockdiv" class="hideMobile" style="display: block;">
+                        <div>
+                            <span class="days"></span>
+                            <div class="smalltext">Jours</div>
+                        </div>
+                        <div>
+                            <span class="hours"></span>
+                            <div class="smalltext">Heures</div>
+                        </div>
+                        <div>
+                            <span class="minutes"></span>
+                            <div class="smalltext">Minutes</div>
+                        </div>
+                        <div>
+                            <span class="seconds"></span>
+                            <div class="smalltext">Secondes</div>
+                        </div><br/>
+                        avant le lancement de la saison 8 ...
+                    </div>
 
-        <p class="lead2">Pronostiquez sur les personnages qui vont survivre, mourir ou devenir marcheur blanc dans la saison finale de Game of Thrones.
-                        La saison 8 démarre le 14 avril 2019 ! Faites vos pronostics avant le début du premier épisode !<br><br>
-                        Répondez au questionnaire ou inscrivez-vous pour pouvoir répondre en cliquant ci-dessous.</br></br>
-            
-                
-            
-            <img style="height: 20%; width: 20%; display: block;" src="{{asset('img/logofondblanc.png')}}" alt="Card image">
-        </p>
+                    <div id="timermobile" class="showMobile demo" style="font-size: 18px; display: none;">
+                        <p id="demo"></p>
+                    </div>
+                </div>
+                #}
 
-        {% if app.user %}
-            <p class="btn-cont">
-                <a class="btn" href="{{path('questionnaire')}}">Questionnaire
-                    <span class='line-1'></span>
-                    <span class='line-2'></span>
-                    <span class='line-3'></span>
-                    <span class='line-4'></span>
-                </a>
-            </p>
-        {% else %}
-            <p class="btn-cont">
-                <a class="btn" href="{{ path('app_register') }}">Inscription
-                    <span class='line-1'></span>
-                    <span class='line-2'></span>
-                    <span class='line-3'></span>
-                    <span class='line-4'></span>
-                </a>
+                {# timer d affichage des résultats #}
+                <div class="col-lg-12">
+                    <h1></h1>
+                    <div id="clockdivResult" class="hideMobile" style="display: block;">
+                        <div>
+                            <span class="days2"></span>
+                            <div class="smalltext">Jours</div>
+                        </div>
+                        <div>
+                            <span class="hours2"></span>
+                            <div class="smalltext">Heures</div>
+                        </div>
+                        <div>
+                            <span class="minutes2"></span>
+                            <div class="smalltext">Minutes</div>
+                        </div>
+                        <div>
+                            <span class="seconds2"></span>
+                            <div class="smalltext">Secondes</div>
+                        </div><br/>
+                        avant les résultats ...
+                    </div>
 
-                <a class="btn" href="{{ path('app_login') }}">Connexion
-                    <span class='line-1'></span>
-                    <span class='line-2'></span>
-                    <span class='line-3'></span>
-                    <span class='line-4'></span>
-                </a>
-            </p>
-        {% endif %}
+                    <div id="timermobile" class="showMobile demoResult" style="font-size: 18px; display: none;">
+                        <p id="demoResult"></p>
+                    </div>
+                </div>
+            </div>
+            <br />
+             {% if app.user == false %}
+            <div class="mt-3 row">
+                <div class="mt-3 col-12">
+                    <p class="white" style="text-align: center; font-size: 16px;">Pronostiquez sur les personnages qui vont survivre, mourir ou devenir marcheur blanc dans la saison finale de Game of Thrones.
+                                    La saison 8 démarre le 14 avril 2019 ! Faites vos pronostics avant le début du premier épisode !<br><br>
+                                    Inscrivez-vous et répondez au questionnaire ! </br><br/>
+                                    Vous pensez savoir qui va monter sur le trône ? ... <br/><br/>
+
+                                    <img src="{{asset('img/logofondblanc.png')}}" style="width: 20%;" alt="Card image">
+                    </p>
+                </div>
+            </div>  
+            {% else %}
+              {% if app.user.jouer is null and app.user.jouerBonnus is null %}
+                    <div class="mt-3 row">
+                       <div class="mt-3 col-12">
+                            <p class="white" style="text-align: center; font-size: 34px;font-family: 'viking'">A vous de jouer   </p>
+                       </div>
+                   </div> 
+                  {% else %}
+                      <div class="mt-3 row">
+                       <div class="mt-3 col-12">
+                            <p class="white" style="text-align: center; font-size: 34px;font-family: 'viking'">Suivez les votes et les resultats ! <br />  
+                                <img src="{{asset('img/logofondblanc.png')}}" style="width: 20%;" alt="Card image">
+                            </p>
+                       </div>
+                   </div> 
+               {% endif %}
+            {% endif %}    
+            <div class="mt-2 row" >
+                <div class="col-12">
+                    {% if app.user %}
+                         <p class="btn-cont">
+                       {% if app.user.jouer is null%}
+                            {#
+                                <a class="btn" href="{{path('questionnaire')}}">Vivant ? Mort ? Marcheur Blanc ?
+                                    <span class='line-1'></span>
+                                    <span class='line-2'></span>
+                                    <span class='line-3'></span>
+                                    <span class='line-4'></span>
+                                </a>
+                            #}
+                        {% else %}
+                            <a class="btn" href="{{path('compte')}}">Les stats
+                                <span class='line-1'></span>
+                                <span class='line-2'></span>
+                                <span class='line-3'></span>
+                                <span class='line-4'></span>
+                            </a>
+                            <a class="btn" href="{{path('scores')}}">Votre score
+                                <span class='line-1'></span>
+                                <span class='line-2'></span>
+                                <span class='line-3'></span>
+                                <span class='line-4'></span>
+                            </a>
+                        {% endif %}
+                        {% if app.user.jouerBonnus is null %}
+                            {#
+                                <a class="btn" href="{{path('bonus')}}">Qui montera sur le trône ?
+                                    <span class='line-1'></span>
+                                    <span class='line-2'></span>
+                                    <span class='line-3'></span>
+                                    <span class='line-4'></span>
+                                </a>
+                            #}
+                        {% endif %}
+                        </p>
+                      
+                    {% else %}
+                        <p class="btn-cont">
+                            {#
+                                <a class="btn" href="{{ path('app_register') }}">Inscription
+                                    <span class='line-1'></span>
+                                    <span class='line-2'></span>
+                                    <span class='line-3'></span>
+                                    <span class='line-4'></span>
+                                </a>
+                            #}
+
+                            <a class="btn" href="{{ path('app_login') }}">Connexion
+                                <span class='line-1'></span>
+                                <span class='line-2'></span>
+                                <span class='line-3'></span>
+                                <span class='line-4'></span>
+                            </a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </div>
+{% endblock %}
+{% block script %}
+<script>
+    // ############## DEBUT TIMER GRAND ECRAN ##############
+    // Set the date we're counting down to
+    {# var countDownDate = new Date("Apr 14, 2019 12:00:00").getTime();
 
+    function getTimeRemaining(endtime) {
+        var t = Date.parse(endtime) - Date.parse(new Date());
 
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        if(distance == 0 || distance < 0) {
+            var days = 0;
+            var hours = 0;
+            var minutes = 0;
+            var seconds = 0;
+        }else{
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        }
+
+        
+
+        return {
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    }
+
+    function initializeClock(id, endtime) {
+        var clock = document.getElementById(id);
+        var daysSpan = clock.querySelector('.days');
+        var hoursSpan = clock.querySelector('.hours');
+        var minutesSpan = clock.querySelector('.minutes');
+        var secondsSpan = clock.querySelector('.seconds');
+
+        function updateClock() {
+            var t = getTimeRemaining(endtime);
+
+            daysSpan.innerHTML = t.days;
+            hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+            minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+            secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+            if (t.total <= 0) {
+            clearInterval(timeinterval);
+            }
+        }
+
+        updateClock();
+        var timeinterval = setInterval(updateClock, 1000);
+    }
+
+    var deadline = new Date(Date.parse(new Date()) + new Date("Apr 14, 2019 01:00:00").getTime());
+    initializeClock('clockdiv', deadline);
+    // ############## FIN TIMER GRAND ECRAN ##############
+    #}
+    // ############## DEBUT TIMER RESULT ##############
+    var compteRebours = new Date("May 20, 2019 01:00:00").getTime();
+
+    function getTimeRemaining2(endtime2) {
+        var t2 = Date.parse(endtime2) - Date.parse(new Date());
+
+        var now = new Date().getTime();
+        var diff = compteRebours - now;
+
+        if(diff == 0 || diff < 0) {
+            var days2 = 0;
+            var hours2 = 0;
+            var minutes2 = 0;
+            var seconds2 = 0;
+        }else{
+            var days2 = Math.floor(diff / (1000 * 60 * 60 * 24));
+            var hours2 = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes2 = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds2 = Math.floor((diff % (1000 * 60)) / 1000);
+        }
+
+        return {
+            'total': t2,
+            'days': days2,
+            'hours': hours2,
+            'minutes': minutes2,
+            'seconds': seconds2
+        };
+    }
+
+    function initializeClock2(id, endtime2) {
+        var clock = document.getElementById(id);
+        var daysSpan2 = clock.querySelector('.days2');
+        var hoursSpan2 = clock.querySelector('.hours2');
+        var minutesSpan2 = clock.querySelector('.minutes2');
+        var secondsSpan2 = clock.querySelector('.seconds2');
+
+        function updateClock2() {
+            var t2 = getTimeRemaining2(endtime2);
+
+            daysSpan2.innerHTML = t2.days;
+            hoursSpan2.innerHTML = ('0' + t2.hours).slice(-2);
+            minutesSpan2.innerHTML = ('0' + t2.minutes).slice(-2);
+            secondsSpan2.innerHTML = ('0' + t2.seconds).slice(-2);
+
+            if (t2.total <= 0) {
+            clearInterval(timeinterval);
+            }
+        }
+
+        updateClock2();
+        var timeinterval = setInterval(updateClock2, 1000);
+    }
+
+    var deadline2 = new Date(Date.parse(new Date()) + new Date("May 20, 2019 01:00:00").getTime());
+    initializeClock2('clockdivResult', deadline2);
+    // ############## FIN TIMER RESULT ##############
+</script>
 {% endblock %}

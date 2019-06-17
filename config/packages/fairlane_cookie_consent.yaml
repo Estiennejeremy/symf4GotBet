@@ -6,7 +6,7 @@ fairlane_cookie_consent:
     translate: false
     cookie_lifetime: 365 # days
     twig:
-        text_info: 'En poursuivant votre navigation sur ce site, vous acceptez l utilisation de traceurs (cookies) afin de réaliser des statistiques anonymes de visites.'
+        text_info: 'En poursuivant votre navigation sur ce site, vous acceptez l utilisation de cookies afin de réaliser des statistiques de visites.'
         text_accept_button: 'Accepter'
         text_additional_info_link: ''
         url_additional_info: ''

@@ -4,6 +4,103 @@ body {
   
 }
 
+.centered {
+  text-align: center;
+}
+
+.white {
+  color: white;
+}
+
+/*@media screen and (max-width : 1200px){
+  .hideMobile {
+    display: none !important;
+  }
+  .showMobile {
+    display: block !important;
+  }
+}
+@media screen and (min-width : 1200px){
+  .hideMobile {
+    display: block !important;
+  }
+  .showMobile {
+    display: none !important;
+  }
+}*/
+/* DEBUT CSS DE TIMER DEBUT SAISON */
+#clockdiv{
+	font-family: sans-serif;
+	color: #fff;
+	display: inline-block;
+	font-weight: 100;
+	text-align: center;
+  font-size: 25px;
+  opacity: 0.70;
+}
+
+#clockdiv > div{
+  padding: 10px;
+	border-radius: 3px;
+	background:  black;
+  display: inline-block;
+}
+
+#clockdiv div > span{
+	padding: 15px;
+	border-radius: 3px;
+	background: #2F4F4F;
+	display: inline-block;
+}
+
+.smalltext{
+	padding-top: 5px;
+	font-size: 14px;
+}
+/* FIN TIMER DE DEBUT SAISON */
+
+/* DEBUT TIMER D AFFICHAGE RESULTATS */
+
+#clockdivResult{
+	font-family: sans-serif;
+	color: #fff;
+	display: inline-block;
+	font-weight: 100;
+	text-align: center;
+  font-size: 25px;
+  opacity: 0.70;
+}
+
+#clockdivResult > div{
+  padding: 10px;
+	border-radius: 3px;
+	background:  black;
+  display: inline-block;
+}
+
+#clockdivResult div > span{
+	padding: 15px;
+	border-radius: 3px;
+	background: #2F4F4F;
+	display: inline-block;
+}
+
+/* FIN TIMER D AFFICHAGE RESULTATS */
+
+.demo{
+  font-size: 35px;
+  position: absolute; /* postulat de départ */
+  top: 33%; left: 30%;
+  transform: translate(-50%, -50%);
+}
+
+.demoResult{
+  font-size: 35px;
+  position: absolute; /* postulat de départ */
+  top: 33%; left: 70%;
+  transform: translate(-50%, -50%);
+}
+
 .phraseCopyright {
     color: white;
     text-align: center;
@@ -13,13 +110,17 @@ body {
     transform: translate(-50%, -50%);
 }
 
+.link {
+  color: #778899;
+}
+
+.link:hover {
+  color: #2F4F4F;
+}
+
 .btn-cont {
   text-align: center;
-  margin-top: 200px;
   padding-bottom: 100px;
-  position: absolute; /* postulat de départ */
-  top: 70%; left: 50%; /* à 50%/50% du parent référent */
-  transform: translate(-50%, -50%);
 }
 
 .btn-cont .btn {
